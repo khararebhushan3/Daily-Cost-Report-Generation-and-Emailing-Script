@@ -31,7 +31,7 @@ import os
 #### SQL Query to Fetch Data
 ```python
 sql_script_downstream_cost = """
-WITH LatestInvoiceEntries AS (
+WITH latest_invoice_entries_tb AS (
     SELECT
         r.RONumber,
         i.InvoiceNo,
@@ -78,7 +78,7 @@ LEFT JOIN models m ON m.Id = v.Model_id
 LEFT JOIN variants va ON va.Id = v.Varient_Id
 LEFT JOIN products pr ON pr.id = p.ProductId
 LEFT JOIN categories ca ON ca.id = pr.category_id
-JOIN LatestInvoiceEntries lie ON i.InvoiceNo = lie.InvoiceNo AND i.InvoiceDate = lie.LatestInvoiceDate
+JOIN latest_invoice_entries_tb lie ON i.InvoiceNo = lie.InvoiceNo AND i.InvoiceDate = lie.LatestInvoiceDate
 """
 ```
 - The SQL script retrieves invoice data, customer information, vehicle details, and product costs from a database.
